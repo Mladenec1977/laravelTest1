@@ -93,8 +93,10 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::where('id', $id)            
-            ->first();
+        
+        $post = Post::find($id);
+        // dd($post);
+        // dump();
 
         return view('post_edit', compact('post'));
     }
@@ -107,7 +109,7 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {        
         $item = Post::find($id);
         if (empty($item)) {
             return back(['msg' => "Entry id =[{$id}] not found"])

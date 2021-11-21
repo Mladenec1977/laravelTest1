@@ -28,11 +28,11 @@
                     <a href="{{route('posts.show', $item->id)}}" class="btn btn-primary">Open</a>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         @auth                        
-                            <button type="button" class="btn btn-outline-info"
+                            <a href="{{route('posts.edit', $item->id)}}" type="button" class="btn btn-outline-info"
                                 @if (Auth::user()->id != $item->user_id)
                                 hidden
                                 @endif
-                                >Edit</button>
+                                >Edit</a>
                         @endauth
                         <a href="{{route('posts.show', $item->id)}}" class="btn btn-primary me-md-2" type="button">
                             Comment

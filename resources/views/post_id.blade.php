@@ -15,11 +15,11 @@
                     
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         @auth                        
-                            <button type="button" class="btn btn-outline-info"
+                            <a href="{{route('posts.edit', $post->id)}}" type="button" class="btn btn-outline-info"
                                 @if (Auth::user()->id != $post->user_id)
                                 hidden
                                 @endif
-                                >Edit</button>
+                                >Edit</a>
                         @endauth                        
                         <button class="btn btn-primary" type="button" @guest disabled @endguest>
                             Like post
