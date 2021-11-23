@@ -24,7 +24,7 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{{$item->title}}</h5>
-                    <p class="card-text">{{$item->text}}</p>
+                    <p class="card-text">{{ substr($item->text, 0, 70) . '...'}}</p>
                     <a href="{{route('posts.show', $item->id)}}" class="btn btn-primary">Open</a>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         @auth                        

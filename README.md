@@ -1,10 +1,10 @@
 Features required:
-    Authorization:
-        User registration (email, name, password) including email confirmation.
+    <h3>Authorization:</h3>
+        <p>User registration (email, name, password) including email confirmation.
         User password update by authorized user himself.
         Password reset (optional) for users that have the password forgotten.
         User login.
-        Creation, update and removal endpoints of the blog should be accessible by the authorized users only. Also, only owners of the posts and comments should be able to update and delete them. While browsing the blog should be available for any user, even unauthenticated.
+        Creation, update and removal endpoints of the blog should be accessible by the authorized users only. Also, only owners of the posts and comments should be able to update and delete them. While browsing the blog should be available for any user, even unauthenticated.</p>
 
     Blog engine:
         Post (Should have title, body, likes and comments, creation time)
