@@ -14,16 +14,20 @@
                     <p class="card-text">{{$post->text}}</p>
                     
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        @auth                        
-                            <a href="{{route('posts.edit', $post->id)}}" type="button" class="btn btn-outline-info"
-                                @if (Auth::user()->id != $post->user_id)
-                                hidden
-                                @endif
-                                >Edit</a>
+                        @auth
+                            @if (Auth::user()->id == $post->user_id)                
+                                <a href="{{route('posts.edit', $post->id)}}" type="button" class="btn btn-outline-info">Edit</a>
+                                <form method="post" action="{{route('posts.destroy', $post->id)}}">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger">DELETE</button>
+                                </form>
+                            @endif
+                            <a href="{{route('addComment', $post->id)}}" type="button" class="btn btn-outline-info">Add comment</a>
                         @endauth                        
-                        <button class="btn btn-primary" type="button" @guest disabled @endguest>
+                        <button class="btn btn-primary" type="button" @auth onclick="addPlike({{$post->id}}, {{Auth::user()->id}})" @endauth @guest disabled @endguest>
                             Like post
-                            <span class="badge rounded-pill bg-danger">
+                            <span id="{{'likeAdd'. $post->id}}" class="badge rounded-pill bg-danger">
                                 {{count($post->addPlike)}}
                                 <span class="visually-hidden">unread messages</span>
                             </span>
@@ -49,7 +53,6 @@
                                 Like
                                 <span class="badge rounded-pill bg-danger">
                                     {{count($item->addClike)}}
-                                    <span class="visually-hidden">unread messages</span>
                                 </span>
                         </button>
                     </div>
@@ -61,5 +64,5 @@
         </div>
         <br>
         @endforeach
-    </div>
+    </div>    
 </x-app-layout>

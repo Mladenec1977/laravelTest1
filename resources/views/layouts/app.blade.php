@@ -15,7 +15,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/app.js') }}" defer></script>        
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         
     </head>
@@ -25,7 +25,7 @@
 
             <!-- Page Heading -->
             <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <div class="flex max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     <a href="/" class="btn btn-primary">Home</a>       
                     {{ $header }}
                 </div>
@@ -36,5 +36,16 @@
                 {{ $slot }}
             </main>
         </div>
+        <script>
+            function addPlike (postId, userId) {
+                const str = 'likeAdd' + postId;
+                const xhttp = new XMLHttpRequest();
+                xhttp.onload = function() {
+                    document.getElementById(str).innerHTML = this.responseText;
+                }
+                xhttp.open("GET", "/post/like/" + postId + '/' + userId);
+                xhttp.send();
+            }
+        </script>
     </body>
 </html>

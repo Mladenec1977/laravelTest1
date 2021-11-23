@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Http\RedirectResponse;
 use App\Models\Post;
+use App\Models\Plike;
 use App\Models\Comment;
 
 class PostController extends Controller
@@ -141,5 +144,17 @@ class PostController extends Controller
     {
         $deletedPost = Post::where('id', $id)->delete();
         return redirect()->route('postList');
+    }
+
+    public function postLike($post_id, $user_id)
+    {
+        $data = [
+            'user_id' => $user_id,
+            'post_id' => $post_id            
+        ];        
+        $like = Plike::updateOrInsert($data);
+        $like2 = Plike::where('post_id', $post_id)
+            ->count();        
+        return response($like2);
     }
 }

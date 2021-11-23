@@ -37,15 +37,13 @@
                         <a href="{{route('posts.show', $item->id)}}" class="btn btn-primary me-md-2" type="button">
                             Comment
                             <span class="badge rounded-pill bg-danger">
-                                {{count($item->addComment)}}
-                                <span class="visually-hidden">unread messages</span>
+                                {{count($item->addComment)}}                                
                             </span>
                         </a>
-                        <button class="btn btn-primary" type="button" @guest disabled @endguest>
+                        <button class="btn btn-primary" type="button" @auth onclick="addPlike({{$item->id}}, {{Auth::user()->id}})"@endauth @guest disabled @endguest>
                             Like
-                            <span class="badge rounded-pill bg-danger">
-                                {{count($item->addPlike)}}
-                                <span class="visually-hidden">unread messages</span>
+                            <span id="{{'likeAdd'. $item->id}}" class="badge rounded-pill bg-danger">
+                                {{count($item->addPlike)}}                                
                             </span>
                         </button>
                     </div>
