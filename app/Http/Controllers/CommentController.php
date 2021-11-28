@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Comment;
 
 class CommentController extends Controller
 {
@@ -13,9 +14,27 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $comment = [
+            'comment' => $data["comment"],
+            'post_id' => $id,
+            'user_id' => $data["user_id"]
+        ];
+
+        // dd($comment);
+        // dump();
+        $result = Comment::create($comment);        
+        if ($result) {            
+            return redirect()
+                ->route('posts.show', $id)
+                ->with(['success' => 'saved successfully']);
+        } else {
+            return back(['msg' => "Save error"])
+                ->withErrors()
+                ->withInput();
+        }
     }
 
     /**

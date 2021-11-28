@@ -48,10 +48,6 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        
-        // dd($request);
-        // dd($data);        
-        // dump();
 
         $result = Post::create($data);        
         if ($result) {            
@@ -97,9 +93,7 @@ class PostController extends Controller
     public function edit($id)
     {
         
-        $post = Post::find($id);
-        // dd($post);
-        // dump();
+        $post = Post::find($id);        
 
         return view('post_edit', compact('post'));
     }
