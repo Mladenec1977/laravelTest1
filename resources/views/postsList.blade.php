@@ -20,7 +20,7 @@
             @foreach($posts as $item)            
             <div class="card text-center">
                 <div class="card-header">
-                    {{$item->addUser->name}}
+                    <a href="{{route('postsUser', $item->user_id)}}">{{$item->addUser->name}}</a>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{{$item->title}}</h5>

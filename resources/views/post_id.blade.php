@@ -7,7 +7,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="card text-center">
                 <div class="card-header">
-                    {{$post->addUser->name}}
+                <a href="{{route('postsUser', $post->user_id)}}">{{$post->addUser->name}}</a>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{{$post->title}}</h5>

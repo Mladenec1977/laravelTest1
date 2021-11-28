@@ -151,4 +151,15 @@ class PostController extends Controller
             ->count();        
         return response($like2);
     }
+    public function postsUser($user_id)
+    {
+        $posts = Post::orderBy('created_at', 'desc')
+            ->where('user_id', $user_id)
+            ->with('addComment')
+            ->with('addPlike')
+            ->with('addUser')
+            ->paginate(25);
+        
+        return view('postsList', compact('posts'));
+    }
 }

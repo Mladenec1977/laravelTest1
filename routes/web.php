@@ -16,6 +16,9 @@ use App\Http\Controllers\PostController;
 Route::get('/', [App\Http\Controllers\PostController::class, 'index'])
     ->name('postList');
 
+Route::get('/posts/user/{user_id}', [App\Http\Controllers\PostController::class, 'postsUser'])
+    ->name('postsUser');
+
 Route::resources([
     'posts' => PostController::class
 ]);
