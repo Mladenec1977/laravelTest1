@@ -40,6 +40,11 @@
             </div>
         </div>
         <br>
+        @if($errors->any())
+            <div class="alert alert-danger" role="alert">
+                {{$errors->first()}}
+            </div>
+        @endif
         @auth
         <div id="divHiddenComment" hidden>        
             <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
@@ -54,7 +59,7 @@
                         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
                         <div class="card-body">
                             <div class="mb-3">
-                                <label for="title" class="form-label">Heading</label>
+                                <label for="title" class="form-label">Leave your comment</label>
                                 <input type="text" class="form-control" name="comment" id="comment" required>
                             </div>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -79,9 +84,9 @@
                 <div class="card-body">
                     <p>{{$item->comment}}</P>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button class="btn btn-primary" type="button" @guest disabled @endguest>
+                        <button class="btn btn-primary" type="button" @auth onclick="addClike({{$item->id}}, {{Auth::user()->id}})" @endauth @guest disabled @endguest>
                                 Like
-                                <span class="badge rounded-pill bg-danger">
+                                <span id="{{'likeComment'. $item->id}}" class="badge rounded-pill bg-danger">
                                     {{count($item->addClike)}}
                                 </span>
                         </button>
@@ -106,5 +111,15 @@
                 }
             }   
         }
+
+        function addClike (commentId, userId) {
+                const str = 'likeComment' + commentId;
+                const xhttp = new XMLHttpRequest();
+                xhttp.onload = function() {
+                    document.getElementById(str).innerHTML = this.responseText;
+                }
+                xhttp.open("GET", "/comment/like/" + commentId + '/' + userId);
+                xhttp.send();
+            }
     </script>
 </x-app-layout>

@@ -25,6 +25,8 @@ Route::get('/post/like/{postId}/{userId}', [App\Http\Controllers\PostController:
 Route::post('/post/{id}/comment', [App\Http\Controllers\CommentController::class, 'store'])
     ->name('addComment');
 
+Route::get('/comment/like/{commentId}/{userId}', [App\Http\Controllers\CommentController::class, 'commentLike']);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

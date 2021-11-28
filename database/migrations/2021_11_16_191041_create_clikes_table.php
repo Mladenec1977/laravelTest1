@@ -18,8 +18,7 @@ class CreateClikesTable extends Migration
             $table->foreignId('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('comment_id')->unsigned()->nullable();
-            $table->foreign('comment_id')->references('id')->on('comments')->onDelete('cascade');
-            $table->timestamps();
+            $table->foreign('comment_id')->references('id')->on('comments')->onDelete('cascade');            
         });
     }
 
